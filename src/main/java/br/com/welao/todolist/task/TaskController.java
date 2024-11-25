@@ -1,7 +1,6 @@
 package br.com.welao.todolist.task;
 
 import br.com.welao.todolist.utils.Utils;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,6 +51,7 @@ public class TaskController {
         var task = this.taskRepository.findById(id).orElse(null);
 
         if (task == null) {
+
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task not found");
         }
 
