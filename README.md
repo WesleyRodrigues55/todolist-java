@@ -43,7 +43,6 @@ Veja mais sobre o `body` e `header` das requisições na coleção do [postman](
 1. Clone o repositório:
    ```bash
    git clone https://github.com/WesleyRodrigues55/todolist-java.git
-   cd todolist-java
    ```
 
 2. Navegue para o projeto:
@@ -63,7 +62,7 @@ Veja mais sobre o `body` e `header` das requisições na coleção do [postman](
 
 ## Base de dados
 
-Foi utilizado o [H2 Databse Engine](https://h2database.com/html/main.html) para armazenamento em memória.
+Foi utilizado o [H2 Database Engine](https://h2database.com/html/main.html) para armazenamento em memória.
 
 Para acessar a base de dados, após a execução do passo acima, acesse no navegador a URL:
 ```bash
