@@ -1,5 +1,7 @@
 package br.com.welao.todolist.task;
 
+import br.com.welao.todolist.itemsTasks.IItemsTaskRepository;
+import br.com.welao.todolist.itemsTasks.ItemsTask;
 import br.com.welao.todolist.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +20,9 @@ public class TaskController {
 
     @Autowired
     private ITaskRepository taskRepository;
+
+    @Autowired
+    private IItemsTaskRepository itemsTaskRepository;
 
     @PostMapping("/")
     public ResponseEntity create(@RequestBody TaskModel taskModel, HttpServletRequest request) {
@@ -46,10 +52,27 @@ public class TaskController {
         return tasks;
     }
 
+    @GetMapping("/get-task/{id}")
+    public ResponseEntity listTaskById(@PathVariable UUID id, HttpServletRequest request) {
+        HashMap<String, Object> taskWithItems = new HashMap<String, Object>();
+
+        var task = this.taskRepository.findById(id).orElse(null);
+        if (task == null) {
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task not found.");
+        }
+
+        var itemsTask = this.itemsTaskRepository.findByTaskId(id);
+
+        taskWithItems.put("task", task);
+        taskWithItems.put("itemsTask", itemsTask);
+
+        return ResponseEntity.status(HttpStatus.OK).body(taskWithItems);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity update(@RequestBody TaskModel taskModel, @PathVariable UUID id, HttpServletRequest request) {
         var task = this.taskRepository.findById(id).orElse(null);
-
         if (task == null) {
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task not found");
