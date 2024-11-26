@@ -1,5 +1,6 @@
 package br.com.welao.todolist.itemsTasks;
 
+import br.com.welao.todolist.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,13 @@ public class ItemsTask {
     public ResponseEntity create(@RequestBody ItemsTaskModel itemsTaskModel, @PathVariable UUID idTask, HttpServletRequest request) {
         var task = itemsTaskRepository.findById(idTask);
         if (task == null) {
+
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task not found.");
         }
 
         var nameItem = this.itemsTaskRepository.findByNameItem(itemsTaskModel.getNameItem());
         if (nameItem != null) {
+
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Item Task already exists.");
         }
 
@@ -34,5 +37,22 @@ public class ItemsTask {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(itemsTask);
     }
+
+    //testar
+    @PutMapping("/{id}")
+    public ResponseEntity update(@RequestBody ItemsTaskModel itemsTaskModel, @PathVariable UUID id, HttpServletRequest request) {
+        var itemsTask = this.itemsTaskRepository.findById(id).orElse(null);
+        if (itemsTask == null) {
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Items Task not found.");
+        }
+
+        Utils.copyNonNullProperties(itemsTaskModel, itemsTask);
+
+        var updateItemsTask = this.itemsTaskRepository.save(itemsTask);
+
+        return ResponseEntity.status(HttpStatus.OK).body(updateItemsTask);
+    }
+
 
 }
