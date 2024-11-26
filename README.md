@@ -8,36 +8,45 @@ back-end.
 
 Projeto feito no Minicurso de Java da Rocketseat, com 5h de duração.
 
-
+---
 ## Estrutura da API Rest
 
-- **`users/`**: Contém a requisição `create` para criar um novo usuário
+**`users/`**: Contém 1 endpoint sendo POST, responsável por criar o usuário e realizar a autenticação
 
 Exemplo:
    ```bash
-    POST http://localhost:8080/users/
+    create user - POST {url}/users/
    ```
-
-- **`tasks/`**: Contém 3 endpoints sendo POST, PUT e GET
+---
+**`tasks/`**: Contém 4 endpoints sendo POST, PUT e 2 GET
 
 Exemplo:
    ```bash
-   POST http://localhost:8080/tasks/
+   create task - POST {url}/tasks/
 
-   GET http://localhost:8080/tasks/
+   list tasks - GET {url}/tasks/
+   
+   list task by id - GET {url}/tasks/get-task/{taskId}
 
-   PUT http://localhost:8080/tasks/{idTask}
+   update task - PUT {url}/tasks/{taskId}
+   ```
+---
+**`items-task/`**: Contém 1 endpoint sendo POST
+
+Exemplo:
+   ```bash
+    create items task - POST {url}/items-task/
    ```
 
 Veja mais sobre o `body` e `header` das requisições na coleção do [postman](https://github.com/WesleyRodrigues55/todolist-java/blob/main/todolist%20-%20minicurso%20java.postman_collection.json). 
 
-
+---
 ## Requisitos para o projeto
 
 - **Java** 17
 - **Maven** para gerenciar dependências e empacotamento
 
-
+---
 ## Como Rodar Localmente
 
 1. Clone o repositório:
@@ -60,6 +69,7 @@ Veja mais sobre o `body` e `header` das requisições na coleção do [postman](
     java -jar target/todolist-1.0.0.jar
     ```
 
+---
 ## Base de dados
 
 Foi utilizado o [H2 Database Engine](https://h2database.com/html/main.html) para armazenamento em memória.
@@ -74,6 +84,7 @@ E entre com o login e senha: `admin`
 Pode mudar as configurações do H2 aqui: [todolist-java/src/main/resources/application.properties](https://github.com/WesleyRodrigues55/todolist-java/blob/main/src/main/resources/application.properties)
 
 
+---
 ## Deploy server
 
 Há um arquivo `Dockerfile` com configurações mínimas, para caso deseje rodar em um outro ambiente.
