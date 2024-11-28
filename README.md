@@ -31,14 +31,15 @@ Exemplo:
    update task - PUT {url}/tasks/{taskId}
    ```
 ---
-**`items-task/`**: Contém 1 endpoint sendo POST
+**`items-task/`**: Contém 2 endpoints sendo POST e PUT
 
 Exemplo:
    ```bash
-    create items task - POST {url}/items-task/
+    create item task - POST {url}/items-task/
+    update item task - PUT {url}/items-task/{id}
    ```
 
-Veja mais sobre o `body` e `header` das requisições na coleção do [postman](https://github.com/WesleyRodrigues55/todolist-java/blob/main/todolist%20-%20minicurso%20java.postman_collection.json). 
+Veja mais sobre o `body` e `header` das requisições na coleção do [insominia](https://github.com/WesleyRodrigues55/todolist-java/blob/main/Insomnia_2024-11-27.json). 
 
 ---
 ## Requisitos para o projeto
