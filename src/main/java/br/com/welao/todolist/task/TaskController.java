@@ -1,7 +1,6 @@
 package br.com.welao.todolist.task;
 
 import br.com.welao.todolist.itemsTasks.IItemsTaskRepository;
-import br.com.welao.todolist.itemsTasks.ItemsTask;
 import br.com.welao.todolist.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +57,6 @@ public class TaskController {
 
         var task = this.taskRepository.findById(id).orElse(null);
         if (task == null) {
-
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task not found.");
         }
 
@@ -74,13 +72,11 @@ public class TaskController {
     public ResponseEntity update(@RequestBody TaskModel taskModel, @PathVariable UUID id, HttpServletRequest request) {
         var task = this.taskRepository.findById(id).orElse(null);
         if (task == null) {
-
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Task not found");
         }
 
         var idUser = request.getAttribute("idUser");
         if (!task.getIdUser().equals(idUser)) {
-
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User without permission to change this task.");
         }
 
